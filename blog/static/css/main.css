@@ -1,4 +1,9 @@
+body {
+	font-family: "Roboto", sans-serif;
+}
+
 h1 {
 	color: teal;
 	font-weight: bold;
+	font-family: "Roboto Slab", serif;
 }
