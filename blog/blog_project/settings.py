@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-eb7vni6s1ax7gltgvr$as%$7^8e5vgw=*_x#$-ezuhn9i6!psa'
 # import os
 # SECRET_KEY = os.environ['SECRET_KEY']
+# https://www.youtube.com/watch?v=gPuTVosUzsw
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
