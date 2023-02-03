@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- Bootstrap -->
-		{% load static %}
-		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-		<title>Blog Home Page</title>
-	</head>
-	<body>
-		
-		<p>Hello from blog app!</p>
+{% extends "blog_app/base.html" %}
 
-	</body>
-</html>
+{% block content %}
+
+{% for post in post_list %}
+	<div>
+		<h2><a href="">{{ post.title }}</a></h2>
+		<p class="text-secondary">Author: <b>{{ post.author }}</b></p>
+		<p class="text-secondary">Published: <i>{{ post.date|date:"d.m.Y H:i" }}</i></p>
+		<p>{{ post.text }}</p>
+		<hr>
+	</div>
+{% empty %}
+	<p>No posts yet.</p>
+{% endfor %}
+
+{% endblock content %}
