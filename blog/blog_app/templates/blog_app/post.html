@@ -1,0 +1,12 @@
+{% extends "blog_app/base.html" %}
+
+{% block content %}
+<div class="post-entry p-3">
+	<h2 class="text-center mt-5 mb-5">{{ post.title }}</h2>
+	<div class="container my-container">
+		<p class="text-secondary small mb-0">Author: <b>{{ post.author }}</b></p>
+		<p class="text-end text-secondary small"><i>Published: {{ post.date|date:"d.m.Y H:i" }}</i></p>
+		<p class="mt-5">{{ post.text }}</p>
+	</div>
+</div>
+{% endblock content %}

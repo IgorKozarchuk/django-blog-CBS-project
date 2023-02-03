@@ -12,3 +12,12 @@ h1 {
 header {
 	background: lemonchiffon;
 }
+
+.post-entry h2 {
+	font-family: "Roboto Slab", serif;
+	color: teal;
+}
+
+.my-container {
+	max-width: 960px;
+}
