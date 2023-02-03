@@ -11,7 +11,7 @@
 	<div class="mt-4 ps-3 pe-3">
 		<h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
 		<p class="text-secondary small">Author: <b>{{ post.author }}</b></p>
-		<p>{{ post.text|truncatewords:20 }}</p>
+		<p>{{ post.text|truncatewords:30 }}</p>
 		<hr>
 	</div>
 {% empty %}

@@ -21,3 +21,7 @@ header {
 .my-container {
 	max-width: 960px;
 }
+
+a.badge:hover {
+	filter: brightness(85%);
+}

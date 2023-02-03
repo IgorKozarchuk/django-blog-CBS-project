@@ -1,4 +1,6 @@
 from django.db import models
+from taggit.managers import TaggableManager
+
 
 # Create your models here.
 class Post(models.Model):
@@ -6,6 +8,13 @@ class Post(models.Model):
 	author = models.ForeignKey("auth.user", on_delete=models.CASCADE) # many-to-one relationship
 	date = models.DateTimeField(auto_now_add=True)
 	text = models.TextField()
+	slug = models.SlugField(unique=True, max_length=100, null=True)
+	tags = TaggableManager()
 
 	def __str__(self) -> str:
 		return self.title
+
+
+# How to add tags:
+# https://dev.to/thepylot/how-to-add-tags-to-your-models-in-django-django-packages-series-1-3704
+# https://www.geeksforgeeks.org/adding-tags-using-django-taggit-in-django-project/
