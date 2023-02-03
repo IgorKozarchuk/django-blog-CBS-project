@@ -3,11 +3,11 @@
 {% block content %}
 
 {% for post in post_list %}
-	<div>
+	<div class="mt-4">
 		<h2><a href="">{{ post.title }}</a></h2>
-		<p class="text-secondary">Author: <b>{{ post.author }}</b></p>
-		<p class="text-secondary">Published: <i>{{ post.date|date:"d.m.Y H:i" }}</i></p>
-		<p>{{ post.text }}</p>
+		<p class="text-secondary small mb-0">Author: <b>{{ post.author }}</b></p>
+		<p class="text-secondary small">Published: <i>{{ post.date|date:"d.m.Y H:i" }}</i></p>
+		<p>{{ post.text|truncatewords:20 }}</p>
 		<hr>
 	</div>
 {% empty %}
