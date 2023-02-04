@@ -9,7 +9,8 @@ class Post(models.Model):
 	author = models.ForeignKey("auth.user", on_delete=models.CASCADE) # many-to-one relationship
 	date = models.DateTimeField(auto_now_add=True)
 	text = models.TextField()
-	slug = models.SlugField(unique=True, max_length=100, null=True)
+	# slug = models.SlugField(unique=True, max_length=100, null=True)
+	slug = models.SlugField(unique=True, max_length=100, null=False, default="")
 	tags = TaggableManager()
 
 	def __str__(self) -> str:

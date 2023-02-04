@@ -32,5 +32,10 @@ def tagged(request, slug):
 
 class BlogCreateView(CreateView):
 	model = Post
-	template_name = "new_post.html"
-	fields = "__all__"
+	template_name = "blog_app/new_post.html"
+	fields = ["title", "author", "text", "tags"]
+
+	def form_valid(self, form):
+		print(form.instance.title)
+		form.instance.slug = slugify(form.instance.title)
+		return super().form_valid(form)
