@@ -50,3 +50,32 @@ class BlogTests(TestCase):
 		self.assertEqual(no_response.status_code, 404)
 		self.assertContains(response, "Test title")
 		self.assertTemplateUsed(response, "blog_app/post.html")
+
+	def test_post_createview(self):
+		response = self.client.post(
+			reverse("new_post"), {
+				"title": "New title",
+				"author": self.user.id,
+				"text": "New text",
+				"tags": "tag1, tag2"
+			}
+		)
+		self.assertEqual(response.status_code, 302)
+		self.assertEqual(Post.objects.last().title, "New title")
+		self.assertEqual(Post.objects.last().text, "New text")
+
+	def test_post_udateview(self):
+		response = self.client.post(
+			reverse("edit_post", args="1"), {
+				"title": "Updated title",
+				"text": "Updated text",
+				"tags": "updatedtag1, updatedtag2"
+			}
+		)
+		self.assertEqual(response.status_code, 302)
+		self.assertEqual(Post.objects.last().title, "Updated title")
+		self.assertEqual(Post.objects.last().text, "Updated text")
+
+	def test_post_deleteview(self):
+		response = self.client.post(reverse("delete_post", args="1"))
+		self.assertEqual(response.status_code, 302)
