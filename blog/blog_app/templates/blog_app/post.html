@@ -3,6 +3,7 @@
 {% block content %}
 <div class="container post-entry my-container p-3">
 	<h2 class="text-center mb-5">{{ post.title }}</h2>
+
 	<p class="text-secondary small mb-0">Author: <b>{{ post.author }}</b></p>
 	<p class="text-end text-secondary small mb-0"><i>Published: {{ post.date|date:"d.m.Y H:i" }}</i></p>
 	<p class="text-end text-secondary small">Tags:
@@ -11,5 +12,8 @@
 		{% endfor %}
 	</p>
 	<p class="mt-5">{{ post.text }}</p>
+
+	<a href="{% url 'edit_post' post.pk %}" class="btn btn-warning float-end">Edit</a>
+	<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger float-end">Delete</a>
 </div>
 {% endblock content %}

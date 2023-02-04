@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.template.defaultfilters import slugify
+from django.urls import reverse_lazy
 from taggit.models import Tag
-
 
 from .models import Post
 
@@ -28,7 +29,6 @@ def tagged(request, slug):
 
 	return render(request, "blog_app/index.html", context)
 
-# For a new post in a form: newpost.slug = slugify(newpost.title)
 
 class BlogCreateView(CreateView):
 	model = Post
@@ -39,3 +39,15 @@ class BlogCreateView(CreateView):
 		print(form.instance.title)
 		form.instance.slug = slugify(form.instance.title)
 		return super().form_valid(form)
+
+
+class BlogUpdateView(UpdateView):
+	model = Post
+	template_name = "blog_app/edit_post.html"
+	fields = ["title", "text", "tags"]
+
+
+class BlogDeleteView(DeleteView):
+	model = Post
+	template_name = "blog_app/delete_post.html"
+	success_url = reverse_lazy("index")
