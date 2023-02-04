@@ -114,7 +114,10 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+# USE_TZ = True
+USE_TZ = False
+# https://docs.djangoproject.com/en/3.2/ref/utils/#module-django.utils.timezone
+# https://www.reddit.com/r/django/comments/p7qhvk/why_is_djangoutilstimezonenowtzinfo_returning_utc/
 
 
 # Static files (CSS, JavaScript, Images)

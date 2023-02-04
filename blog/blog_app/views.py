@@ -25,3 +25,5 @@ def tagged(request, slug):
 	}
 
 	return render(request, "blog_app/index.html", context)
+
+# For a new post in a form: newpost.slug = slugify(newpost.title)
