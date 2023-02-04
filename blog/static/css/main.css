@@ -9,10 +9,11 @@ h1 {
 	color: teal;
 }
 
-header {
+header nav.navbar {
 	background: lemonchiffon;
 }
 
+header nav.navbar h1 a,
 .post-entry h2 {
 	font-family: "Roboto Slab", serif;
 	color: teal;
@@ -20,6 +21,7 @@ header {
 
 .my-container {
 	max-width: 960px;
+	margin-top: 100px;
 }
 
 a.badge:hover {
