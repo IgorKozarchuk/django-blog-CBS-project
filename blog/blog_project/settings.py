@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -144,3 +145,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
+
+
+# Media
+MEDIA_URL = '/media/' # absolute filesystem path to the directory for user-uploaded files
+MEDIA_ROOT = BASE_DIR / 'media' # URL we can use in our templates for the files
+
+# https://learndjango.com/tutorials/django-file-and-image-uploads-tutorial

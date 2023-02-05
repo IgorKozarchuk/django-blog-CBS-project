@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.template.defaultfilters import slugify
@@ -33,7 +33,7 @@ def tagged(request, slug):
 class BlogCreateView(CreateView):
 	model = Post
 	template_name = "blog_app/new_post.html"
-	fields = ["title", "author", "text", "tags"]
+	fields = ["title", "author", "text", "img", "tags"]
 
 	def form_valid(self, form):
 		print(form.instance.title)
@@ -44,7 +44,7 @@ class BlogCreateView(CreateView):
 class BlogUpdateView(UpdateView):
 	model = Post
 	template_name = "blog_app/edit_post.html"
-	fields = ["title", "text", "tags"]
+	fields = ["title", "text", "img", "tags"]
 
 
 class BlogDeleteView(DeleteView):

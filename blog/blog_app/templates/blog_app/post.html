@@ -11,7 +11,12 @@
 		<a href="{% url 'tagged' tag.slug %}" class="badge bg-success text-decoration-none">{{ tag }}</a>
 		{% endfor %}
 	</p>
-	<p class="mt-5">{{ post.text }}</p>
+
+	{% if post.img %}
+		<img src="{{ post.img.url }}" alt="{{ post.title }}" class="mx-auto d-block rounded mt-5 post-img">
+	{% endif %}
+
+	<p class="mt-4">{{ post.text }}</p>
 
 	<a href="{% url 'edit_post' post.pk %}" class="btn btn-warning float-start">
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">

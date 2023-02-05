@@ -3,10 +3,16 @@
 {% block content %}
 <div class="container my-container">
 	<h2>Edit post</h2>
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ form.as_p }}
 		<button type="submit" class="btn btn-success">Update</button>
 	</form>
 </div>
 {% endblock content %}
+
+
+{#
+	NOTE: don't forget to add following line or image won't upload:
+	enctype="multipart/form-data"
+#}
