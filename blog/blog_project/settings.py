@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic', # serve static files in production
     'django.contrib.staticfiles',
     'taggit',
     'blog_app',
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,9 +126,13 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_ROOT = ""
+# NOTE: since Django won’t serve static files in production, we need a few extra steps. The first change is to use Django’s collectstatic command which compiles all static files throughout the project into a single directory suitable for deployment. Second, we must set the STATIC_ROOT configuration, which is the absolute location of these collected files, to a folder called staticfiles. And third, we need to set STATICFILES_STORAGE, which is the file storage engine used by collectstatic.
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = ('static',)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type
@@ -135,5 +141,6 @@ STATICFILES_DIRS = ('static',)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Log in/out
+
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'

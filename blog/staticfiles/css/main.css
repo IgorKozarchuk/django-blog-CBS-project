@@ -1,0 +1,33 @@
+body {
+	font-family: "Roboto", sans-serif;
+	background: ivory;
+}
+
+h1 {
+	font-family: "Roboto Slab", serif;
+	font-weight: 500;
+	color: teal;
+}
+
+header nav.navbar {
+	background: lemonchiffon;
+}
+
+header nav.navbar h1 a,
+.post-entry h2 {
+	font-family: "Roboto Slab", serif;
+	color: teal;
+}
+
+.my-container {
+	max-width: 960px;
+}
+
+a.badge:hover {
+	filter: brightness(85%);
+}
+
+.welcome-user {
+	max-width: 960px;
+	margin-top: 100px;
+}
