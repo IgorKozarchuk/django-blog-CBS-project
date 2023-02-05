@@ -4,12 +4,10 @@
 
 <div class="container my-container">
 {% for post in post_list %}
-	<div class="mt-4 ps-3 pe-3">
-		<h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
-		<p class="text-secondary small">Author: <b>{{ post.author }}</b></p>
-		<p>{{ post.text|truncatewords:30 }}</p>
-		<hr>
-	</div>
+	<h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+	<p class="text-secondary small">Author: <b>{{ post.author }}</b></p>
+	<p>{{ post.text|truncatewords:30 }}</p>
+	<hr>
 {% empty %}
 	<p>No posts yet.</p>
 {% endfor %}

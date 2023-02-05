@@ -30,6 +30,15 @@
 			</nav>
 		</header>
 
+		<div class="welcome-user container text-end">
+		{% if user.is_authenticated %}
+			<p>Hi, {{ user.username }}!</p>
+			<p><a href="{% url 'logout' %}">Log Out</a></p>
+		{% else %}
+			<p>You are not logged in</p>
+		{% endif %}
+		</div>
+
 		{% block content %}
 		{% endblock content %}
 		
