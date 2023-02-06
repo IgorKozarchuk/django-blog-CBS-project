@@ -35,3 +35,7 @@ a.badge:hover {
 .post-img {
 	max-height: 480px;
 }
+
+.post-controls {
+	min-height: 60px;
+}
