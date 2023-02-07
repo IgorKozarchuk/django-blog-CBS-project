@@ -74,10 +74,12 @@ def tagged(request, slug):
 class BlogCreateView(LoginRequiredMixin, CreateView):
 	model = Post
 	template_name = "blog_app/new_post.html"
-	fields = ["title", "author", "text", "img", "tags"]
+	# fields = ["title", "author", "text", "img", "tags"] # show author dropdown
+	fields = ["title", "text", "img", "tags"] # show author dropdown
 
 	def form_valid(self, form):
 		form.instance.slug = slugify(form.instance.title)
+		form.instance.author = self.request.user
 		return super().form_valid(form)
 
 
