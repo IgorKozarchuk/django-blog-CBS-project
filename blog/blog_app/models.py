@@ -33,6 +33,9 @@ class Comment(models.Model):
 	def get_absolute_url(self):
 		return reverse("post_detail")
 
+	# class Meta:
+	# 	ordering = ["-date"]
+
 
 # How to add tags:
 # https://dev.to/thepylot/how-to-add-tags-to-your-models-in-django-django-packages-series-1-3704

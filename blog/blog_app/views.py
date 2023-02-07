@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from taggit.models import Tag
 
 from .models import Post
+from .forms import CommentForm
 
 
 # Create your views here.
@@ -20,6 +21,11 @@ class BlogDetailView(DetailView):
 	model = Post
 	template_name = "blog_app/post.html"
 
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context["form"] = CommentForm()
+		return context
+
 
 def tagged(request, slug):
 	tag = get_object_or_404(Tag, slug=slug)
@@ -28,7 +34,6 @@ def tagged(request, slug):
 		"tag": tag,
 		"post_list": posts,
 	}
-
 	return render(request, "blog_app/index.html", context)
 
 
