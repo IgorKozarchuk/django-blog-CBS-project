@@ -10,4 +10,3 @@ class CommentForm(forms.ModelForm):
 		widgets = {
 			"comment": forms.Textarea(attrs={"rows": 5, "cols": 40})
 		} # size of textarea field
-

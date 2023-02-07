@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views import View
+from django.views.generic import ListView, DetailView, FormView
+from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.template.defaultfilters import slugify
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from taggit.models import Tag
 
 from .models import Post
@@ -17,7 +19,7 @@ class BlogListView(ListView):
 	ordering = ["-date"] # sort by date in descending order (new posts on top)
 
 
-class BlogDetailView(DetailView):
+class CommentGet(DetailView):
 	model = Post
 	template_name = "blog_app/post.html"
 
@@ -25,6 +27,37 @@ class BlogDetailView(DetailView):
 		context = super().get_context_data(**kwargs)
 		context["form"] = CommentForm()
 		return context
+
+
+class CommentPost(SingleObjectMixin, FormView):
+	model = Post
+	form_class = CommentForm
+	template_name = "blog_app/post.html"
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		return super().post(request, *args, **kwargs)
+
+	def form_valid(self, form):
+		comment = form.save(commit=False)
+		comment.post = self.object
+		comment.save()
+		return super().form_valid(form)
+
+	def get_success_url(self):
+		post = self.get_object()
+		return reverse("post_detail", kwargs={"pk": post.pk})
+
+
+# wrapper view, handles GET and POST requests
+class BlogDetailView(LoginRequiredMixin, View):
+	def get(self, request, *args, **kwargs):
+		view = CommentGet.as_view()
+		return view(request, *args, **kwargs)
+	
+	def post(self, request, *args, **kwargs):
+		view = CommentPost.as_view()
+		return view(request, *args, **kwargs)
 
 
 def tagged(request, slug):
@@ -43,7 +76,6 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 	fields = ["title", "author", "text", "img", "tags"]
 
 	def form_valid(self, form):
-		print(form.instance.title)
 		form.instance.slug = slugify(form.instance.title)
 		return super().form_valid(form)
 
