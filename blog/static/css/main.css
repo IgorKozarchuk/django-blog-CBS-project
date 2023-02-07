@@ -39,3 +39,7 @@ a.badge:hover {
 .post-controls {
 	min-height: 60px;
 }
+
+.comments {
+	background: lemonchiffon;
+}

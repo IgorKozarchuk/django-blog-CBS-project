@@ -24,13 +24,14 @@ class Post(models.Model):
 class Comment(models.Model):
 	post = models.ForeignKey(Post, on_delete=models.CASCADE)
 	author = models.ForeignKey("auth.user", on_delete=models.CASCADE)
+	date = models.DateTimeField(auto_now_add=True)
 	comment = models.TextField()
 
 	def __str__(self) -> str:
 		return self.comment
 
 	def get_absolute_url(self):
-		return reverse("index")
+		return reverse("post_detail")
 
 
 # How to add tags:

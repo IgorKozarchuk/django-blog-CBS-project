@@ -13,7 +13,7 @@
 	</p>
 
 	{% if post.img %}
-		<img src="{{ post.img.url }}" alt="{{ post.title }}" class="mx-auto d-block rounded mt-5 img-fluid post-img">
+	<img src="{{ post.img.url }}" alt="{{ post.title }}" class="mx-auto d-block rounded mt-5 img-fluid post-img">
 	{% endif %}
 
 	<p class="mt-4">{{ post.text }}</p>
@@ -34,6 +34,21 @@
 		</a>
 	</div>
 	{% endif %}
+
+	<h3 class="mt-4 mb-3">Comments</h3>
+	<div class="comments">
+	{% for comment in post.comment_set.all %}
+		<div class="comment-container p-4 border-bottom border-2">
+			<div class="d-flex">
+				<p class="flex-fill">Author: <b>{{ comment.author }}</b></p>
+				<p class="flex-fill text-end text-secondary small"><i>{{ comment.date|date:"d.m.Y H:i" }}</i></p>
+			</div>
+			<p><i>{{ comment }}</i></p>
+		</div>
+	{% empty %}
+		<p class="p-4 text-center text-secondary small"><i>No comments yet</i></p>
+	{% endfor %}
+	</div>
 
 </div>
 {% endblock content %}
