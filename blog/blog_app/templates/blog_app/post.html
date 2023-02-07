@@ -4,16 +4,19 @@
 <div class="container post-entry my-container">
 	<h2 class="text-center mb-5">{{ post.title }}</h2>
 
-	<p class="text-secondary small mb-0">Author: <b>{{ post.author }}</b></p>
-	<p class="text-end text-secondary small mb-0"><i>Published: {{ post.date|date:"d.m.Y H:i" }}</i></p>
+	<div class="d-flex">
+		<p class="flex-fill text-secondary small mb-0">Author: <b>{{ post.author }}</b></p>
+		<p class="flex-fill text-end text-secondary small mb-0"><i>Published: {{ post.date|date:"d.m.Y H:i" }}</i></p>
+	</div>
+
 	<p class="text-end text-secondary small">Tags:
-		{% for tag in post.tags.all %}
+	{% for tag in post.tags.all %}
 		<a href="{% url 'tagged' tag.slug %}" class="badge bg-success text-decoration-none">{{ tag }}</a>
 		{% endfor %}
 	</p>
 
 	{% if post.img %}
-	<img src="{{ post.img.url }}" alt="{{ post.title }}" class="mx-auto d-block rounded mt-5 img-fluid post-img">
+	<img src="{{ post.img.url }}" alt="{{ post.title }}" class="mx-auto d-block rounded mt-4 img-fluid post-img">
 	{% endif %}
 
 	<p class="mt-4">{{ post.text }}</p>
@@ -48,7 +51,7 @@
 	</div>
 	{% endif %}
 
-	<div class="comments">
+	<div class="comments mb-3">
 	{% for comment in post.comment_set.all %}
 		<div class="comment-container p-4 border-bottom border-2">
 			<div class="d-flex">
