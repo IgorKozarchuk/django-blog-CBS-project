@@ -1,0 +1,6 @@
+pip install django
+pip install environs
+pip install whitenoise
+pip install django-taggit
+pip install dj-database-url
+pip install pillow
