@@ -193,3 +193,6 @@ SECURE_HSTS_PRELOAD = True
 # SECURE_HSTS_SECONDS = None
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 # SECURE_FRAME_DENY = False
+
+# Pythonanywhere.com deployment:
+# https://youtu.be/xtnUwvjOThg
