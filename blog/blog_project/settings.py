@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
+
+
+env = Env()
+env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,15 +26,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-eb7vni6s1ax7gltgvr$as%$7^8e5vgw=*_x#$-ezuhn9i6!psa'
-# import os
-# SECRET_KEY = os.environ['SECRET_KEY']
-# https://www.youtube.com/watch?v=gPuTVosUzsw
+# SECRET_KEY = 'django-insecure-eb7vni6s1ax7gltgvr$as%$7^8e5vgw=*_x#$-ezuhn9i6!psa'
+SECRET_KEY = env.str("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True # development
+DEBUG = env.bool("DEBUG", default=False) # production
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "igork.pythonanywhere.com"]
 
 
 # Application definition
@@ -83,10 +88,11 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    "default": env.dj_db_url("DATABASE_URL")
 }
 
 
@@ -150,5 +156,29 @@ LOGOUT_REDIRECT_URL = 'index'
 # Media
 MEDIA_URL = '/media/' # absolute filesystem path to the directory for user-uploaded files
 MEDIA_ROOT = BASE_DIR / 'media' # URL we can use in our templates for the files
-
 # https://learndjango.com/tutorials/django-file-and-image-uploads-tutorial
+
+
+# *** SECURITY ***
+
+# CSRF protection
+CSRF_COOKIE_SECURE = True # to avoid transmitting the CSRF cookie over HTTP accidentally
+CSRF_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SECURE = True # to avoid transmitting the session cookie over HTTP accidentally
+# XSS protection
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+# SSL Redirect
+SECURE_SSL_REDIRECT = True # to force Django redirect all non-HTTPS requests to HTTPS
+
+X_FRAME_OPTIONS = 'DENY'
+
+# HTTP Strict Transport Security
+# When this policy is set, browsers will refuse to connect to your site for the given time period if you’re not properly serving HTTPS resources, or if your certificate expires.
+SECURE_HSTS_SECONDS = 86400 # 1 day - set low, but when site is ready for deployment, set to at least 15768000 (6 months)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+
+# https://stackoverflow.com/questions/52405589/how-to-check-django-security-vulnerabilities-and-how-to-fix-them
+# https://dev.to/thepylot/django-web-security-checklist-before-deployment-secure-your-django-app-4jb8
