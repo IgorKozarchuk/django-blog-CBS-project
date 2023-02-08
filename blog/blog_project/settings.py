@@ -161,38 +161,38 @@ MEDIA_ROOT = BASE_DIR / 'media' # URL we can use in our templates for the files
 
 # *** SECURITY ***
 
-# # CSRF protection
-# CSRF_COOKIE_SECURE = True # to avoid transmitting the CSRF cookie over HTTP accidentally
-# CSRF_COOKIE_SAMESITE = 'Strict'
-# SESSION_COOKIE_SECURE = True # to avoid transmitting the session cookie over HTTP accidentally
-# # XSS protection
-# SECURE_BROWSER_XSS_FILTER = True
-# SECURE_CONTENT_TYPE_NOSNIFF = True
-# # SSL Redirect
-# SECURE_SSL_REDIRECT = True # to force Django redirect all non-HTTPS requests to HTTPS
+# CSRF protection
+CSRF_COOKIE_SECURE = True # to avoid transmitting the CSRF cookie over HTTP accidentally
+CSRF_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SECURE = True # to avoid transmitting the session cookie over HTTP accidentally
+# XSS protection
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+# SSL Redirect
+# SECURE_SSL_REDIRECT = True # to force Django redirect all non-HTTPS requests to HTTPS (NOTE: don't set to True on localhost - Secure Connection Failed error)
 
-# X_FRAME_OPTIONS = 'DENY'
+X_FRAME_OPTIONS = 'DENY'
 
-# # HTTP Strict Transport Security
-# # When this policy is set, browsers will refuse to connect to your site for the given time period if you’re not properly serving HTTPS resources, or if your certificate expires.
-SECURE_HSTS_SECONDS = 300 # set low, but when site is ready for deployment, set to at least 15768000 (6 months)
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
+# HTTP Strict Transport Security
+# When this policy is set, browsers will refuse to connect to your site for the given time period if you’re not properly serving HTTPS resources, or if your certificate expires.
+SECURE_HSTS_SECONDS = 30 # set low, but when site is ready for deployment, set to at least 15768000 (6 months)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 # https://stackoverflow.com/questions/52405589/how-to-check-django-security-vulnerabilities-and-how-to-fix-them
 # https://dev.to/thepylot/django-web-security-checklist-before-deployment-secure-your-django-app-4jb8
 
 # RESET SECUTIRY - if Error "You're accessing the development server over HTTPS, but it only supports HTTP" - uncomment the following code
 # https://stackoverflow.com/questions/35536491/error-youre-accessing-the-development-server-over-https-but-it-only-supports
-CORS_REPLACE_HTTPS_REFERER = False
-HOST_SCHEME = "http://"
-SECURE_PROXY_SSL_HEADER = None
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-SECURE_HSTS_SECONDS = None
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-SECURE_FRAME_DENY = False
+# CORS_REPLACE_HTTPS_REFERER = False
+# HOST_SCHEME = "http://"
+# SECURE_PROXY_SSL_HEADER = None
+# SECURE_SSL_REDIRECT = False
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False
+# SECURE_HSTS_SECONDS = None
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+# SECURE_FRAME_DENY = False
 
 # Pythonanywhere.com deployment:
 # https://youtu.be/xtnUwvjOThg

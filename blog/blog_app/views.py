@@ -51,7 +51,8 @@ class CommentPost(SingleObjectMixin, FormView):
 
 
 # wrapper view, handles GET and POST requests
-class BlogDetailView(LoginRequiredMixin, View):
+# class BlogDetailView(LoginRequiredMixin, View):
+class BlogDetailView(View):
 	def get(self, request, *args, **kwargs):
 		view = CommentGet.as_view()
 		return view(request, *args, **kwargs)
