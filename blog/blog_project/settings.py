@@ -179,6 +179,17 @@ SECURE_HSTS_SECONDS = 86400 # 1 day - set low, but when site is ready for deploy
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
-
 # https://stackoverflow.com/questions/52405589/how-to-check-django-security-vulnerabilities-and-how-to-fix-them
 # https://dev.to/thepylot/django-web-security-checklist-before-deployment-secure-your-django-app-4jb8
+
+# RESET SECUTIRY - if Error "You're accessing the development server over HTTPS, but it only supports HTTP" - uncomment the following code
+# https://stackoverflow.com/questions/35536491/error-youre-accessing-the-development-server-over-https-but-it-only-supports
+# CORS_REPLACE_HTTPS_REFERER = False
+# HOST_SCHEME = "http://"
+# SECURE_PROXY_SSL_HEADER = None
+# SECURE_SSL_REDIRECT = False
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False
+# SECURE_HSTS_SECONDS = None
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+# SECURE_FRAME_DENY = False
