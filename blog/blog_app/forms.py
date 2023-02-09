@@ -8,6 +8,6 @@ class CommentForm(forms.ModelForm):
 		model = Comment
 		# fields = ["author", "comment"] # choose author when commenting
 		fields = ["comment"]
-		widgets = {
+		widgets = { # size of textarea field
 			"comment": forms.Textarea(attrs={"rows": 4, "cols": 40})
-		} # size of textarea field
+		}

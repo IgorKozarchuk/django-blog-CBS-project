@@ -76,7 +76,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 	model = Post
 	template_name = "blog_app/new_post.html"
 	# fields = ["title", "author", "text", "img", "tags"] # show author dropdown
-	fields = ["title", "text", "img", "tags"] # show author dropdown
+	fields = ["title", "text", "img", "tags"]
 
 	def form_valid(self, form):
 		form.instance.slug = slugify(form.instance.title)
@@ -91,7 +91,7 @@ class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 	def test_func(self):
 		obj = self.get_object() # current object returned by the view
-		return obj.author == self.request.user # author is logged in user
+		return obj.author == self.request.user # author is a logged in user
 
 
 class BlogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

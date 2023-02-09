@@ -139,7 +139,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = ('static',)
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage' # development - ValueError: Missing staticfiles manifest entry
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # production - in test gives ValueError: Missing staticfiles manifest entry
 
 
 # Default primary key field type

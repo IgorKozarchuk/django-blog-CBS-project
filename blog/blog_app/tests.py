@@ -79,3 +79,7 @@ class BlogTests(TestCase):
 	def test_post_deleteview(self):
 		response = self.client.post(reverse("delete_post", args="1"))
 		self.assertEqual(response.status_code, 302)
+
+
+class CommentTests(TestCase):
+	pass # TODO
