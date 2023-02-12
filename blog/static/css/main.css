@@ -43,3 +43,13 @@ a.badge:hover {
 .comments {
 	background: lemonchiffon;
 }
+
+.my-pagecount {
+	border: none;
+	background: none;
+	color: inherit;
+}
+.my-pagecount:hover {
+	background: none;
+	color: inherit;
+}

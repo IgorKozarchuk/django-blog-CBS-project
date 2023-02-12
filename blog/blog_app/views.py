@@ -14,6 +14,8 @@ from .forms import CommentForm
 
 # Create your views here.
 class BlogListView(ListView):
+	# https://docs.djangoproject.com/en/4.1/topics/pagination/#paginating-a-listview
+	paginate_by = 5 # how many objects should be displayed per page
 	model = Post
 	template_name = "blog_app/index.html"
 	ordering = ["-date"] # sort by date in descending order (new posts on top)

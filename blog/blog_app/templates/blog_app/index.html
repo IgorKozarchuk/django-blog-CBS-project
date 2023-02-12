@@ -11,6 +11,24 @@
 {% empty %}
 	<p>No posts yet</p>
 {% endfor %}
+
+	<div class="pagination">
+		<ul class="step-links container pagination justify-content-center">
+			{% if page_obj.has_previous %}
+			<li class="page-item"><a href="?page=1" class="page-link">&laquo; first</a></li>
+			<li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="page-link me-2">prev</a></li>
+			{% endif %}
+
+			<li class="page-item"><a class="current page-link my-pagecount">
+				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+			</a></li>
+
+			{% if page_obj.has_next %}
+			<li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link ms-2">next</a></li>
+			<li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">last &raquo;</a></li>
+			{% endif %}
+		</ul>
+	</div>
 </div>
 
 {% endblock content %}
