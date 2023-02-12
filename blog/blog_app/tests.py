@@ -2,7 +2,8 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from .models import Post
+from .models import Post, Comment
+from .forms import CommentForm
 
 
 # Create your tests here.
@@ -14,7 +15,6 @@ class BlogTests(TestCase):
 			email="test@email.com",
 			password="1234"
 		)
-
 		cls.post = Post.objects.create(
 			title="Test title",
 			author=cls.user,
@@ -86,4 +86,31 @@ class BlogTests(TestCase):
 
 
 class CommentTests(TestCase):
-	pass # TODO
+	@classmethod
+	def setUpTestData(cls) -> None:
+		cls.user = get_user_model().objects.create_user(
+			username="testuser",
+			email="test@email.com",
+			password="1234"
+		)
+		cls.post = Post.objects.create(
+			title="Test title",
+			author=cls.user,
+			text="Test text"
+		)
+		cls.comment = Comment.objects.create(
+			post=cls.post,
+			author=cls.user,
+			comment="Test comment"
+		)
+	
+	def test_comment_model(self):
+		self.assertEqual(str(self.comment.post), "Test title")
+		self.assertEqual(self.comment.author.username, "testuser")
+		self.assertEqual(self.comment.comment, "Test comment")
+		# self.assertEqual(self.comment.date.strftime("%d.%m.%Y %H:%M"), "12.02.2023 14:07") # NOTE: change to current date and time
+		self.assertEqual(self.comment.get_absolute_url(), "/blog_app/post/1/")
+
+	def test_comment_form_valid(self):
+		form = CommentForm(data=self.comment.__dict__)
+		self.assertTrue(form.is_valid())
