@@ -52,6 +52,8 @@ class BlogTests(TestCase):
 		self.assertTemplateUsed(response, "blog_app/post.html")
 
 	def test_post_createview(self):
+		# NOTE: add this line if user needs to be logged in (for example, when using LoginRequiredMixin in create view)
+		self.client.force_login(self.user) # https://stackoverflow.com/questions/46001747/django-test-client-post-data
 		response = self.client.post(
 			reverse("new_post"), {
 				"title": "New title",
@@ -65,6 +67,8 @@ class BlogTests(TestCase):
 		self.assertEqual(Post.objects.last().text, "New text")
 
 	def test_post_udateview(self):
+		# NOTE: add this line if user needs to be logged in (for example, when using LoginRequiredMixin in create view)
+		self.client.force_login(self.user)
 		response = self.client.post(
 			reverse("edit_post", args="1"), {
 				"title": "Updated title",
