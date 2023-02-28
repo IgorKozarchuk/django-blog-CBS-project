@@ -2,8 +2,7 @@ ________________________________________
 
 Django MTV (Model-Template-View) pattern:
 
-* views.py determines what content is displayed on a given
-page.
+* views.py determines what content is displayed on a given page.
 * urls.py determines where that content is going.
 * model.py contains the content from the database.
 * template provides styling (html) for it.
@@ -143,12 +142,13 @@ NOTE: you don’t have to include a name after makemigrations. If you simply run
 	5) https://stackoverflow.com/questions/34548768/no-such-table-exception
 		py manage.py migrate --run-syncdb
 
+
 14. Create forms (myapp/forms.py):
 
 	from django import forms
 
 	class NameForm(forms.Form):
-		yout_name = forms.CharField(label="Your name", max_length=100)
+		your_name = forms.CharField(label="Your name", max_length=100)
 
 
 15. Import forms in myapp/views.py:
@@ -243,4 +243,4 @@ https://stackoverflow.com/questions/52405589/how-to-check-django-security-vulner
 
 	py manage.py collectstatic
 
-NOTE: Before each new deployment, the collectstatic command must be run to compile them into this staticfiles folder used in production.
+NOTE: Before each new deployment, the collectstatic command must be run to compile static files into this staticfiles folder used in production.
