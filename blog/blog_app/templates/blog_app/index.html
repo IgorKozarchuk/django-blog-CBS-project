@@ -3,14 +3,14 @@
 {% block content %}
 
 <div class="container my-container">
-{% for post in post_list %}
+	{% for post in post_list %}
 	<h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
 	<p class="text-secondary small">Author: <b>{{ post.author }}</b></p>
 	<p>{{ post.text|truncatewords:30 }}</p>
 	<hr>
-{% empty %}
+	{% empty %}
 	<p>No posts yet</p>
-{% endfor %}
+	{% endfor %}
 
 	<div class="pagination">
 		<ul class="step-links container pagination justify-content-center">

@@ -10,7 +10,7 @@
 	</div>
 
 	<p class="text-end text-secondary small">Tags:
-	{% for tag in post.tags.all %}
+		{% for tag in post.tags.all %}
 		<a href="{% url 'tagged' tag.slug %}" class="badge bg-success text-decoration-none">{{ tag }}</a>
 		{% endfor %}
 	</p>
