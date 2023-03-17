@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.template.defaultfilters import slugify
 from django.urls import reverse_lazy, reverse
+from django.db.models import Q
 from taggit.models import Tag
 
 from .models import Post
@@ -14,9 +15,14 @@ from .forms import CommentForm
 
 
 # Create your views here.
+
+# constants
+ITEMS_PER_PAGE = 5 # max number of items to include on a page when pagintaion is used
+
+
 class BlogListView(ListView):
 	# https://docs.djangoproject.com/en/4.1/topics/pagination/#paginating-a-listview
-	paginate_by = 5 # how many objects should be displayed per page
+	paginate_by = ITEMS_PER_PAGE # how many objects should be displayed per page
 	model = Post
 	template_name = "blog_app/index.html"
 	ordering = ["-date"] # sort by date in descending order (new posts on top)
@@ -69,7 +75,7 @@ def tagged(request, slug):
 	tag = get_object_or_404(Tag, slug=slug)
 	posts = Post.objects.filter(tags=tag)
 	# https://docs.djangoproject.com/en/4.1/topics/pagination/#using-paginator-in-a-view-function
-	paginator = Paginator(posts, 5)
+	paginator = Paginator(posts, ITEMS_PER_PAGE)
 	page_number = request.GET.get("page")
 	page_obj = paginator.get_page(page_number)
 	context = {
@@ -115,3 +121,23 @@ class BlogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 # NOTE: When using mixins with class-based views the order is important.
 # LoginRequiredMixin comes first so that we force log in, then we add UserPassesTestMixin for an additional layer of functionality,
 # and finally either UpdateView or DeleteView.
+
+
+# Search:
+# https://stackoverflow.com/questions/66386490/making-search-bar-in-django
+# https://learndjango.com/tutorials/django-search-tutorial
+class SearchResultsView(ListView):
+	"""Search by post's title and text"""
+
+	paginate_by = ITEMS_PER_PAGE
+	model = Post
+	template_name = "blog_app/index.html"
+	
+	def get_queryset(self):
+		query = self.request.GET.get("q")
+		if query: # if query is not empty
+			object_list = Post.objects.filter(
+				Q(title__icontains=query) | Q(text__icontains=query)
+			)
+			return object_list
+		return [] # if query is empty, return empty list
