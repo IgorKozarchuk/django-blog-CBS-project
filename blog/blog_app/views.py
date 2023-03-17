@@ -135,9 +135,7 @@ class SearchResultsView(ListView):
 	
 	def get_queryset(self):
 		query = self.request.GET.get("q")
-		if query: # if query is not empty
-			object_list = Post.objects.filter(
-				Q(title__icontains=query) | Q(text__icontains=query)
-			)
-			return object_list
-		return [] # if query is empty, return empty list
+		object_list = Post.objects.filter(
+			Q(title__icontains=query) | Q(text__icontains=query)
+		)
+		return object_list
