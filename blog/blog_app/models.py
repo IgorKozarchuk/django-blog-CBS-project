@@ -13,12 +13,16 @@ class Post(models.Model):
 	# slug = models.SlugField(unique=True, max_length=100, null=True)
 	slug = models.SlugField(unique=True, max_length=100, null=False, default="")
 	tags = TaggableManager()
+	favourites = models.ManyToManyField("auth.user", related_name="favourite", blank=True, default=None)
 
 	def __str__(self) -> str:
 		return self.title
 	
 	def get_absolute_url(self):
 		return reverse("post_detail", kwargs={"pk": self.pk})
+
+# How to add to favourites:
+# https://www.youtube.com/watch?v=H4QPHLmsZMU
 
 
 class Comment(models.Model):
@@ -31,11 +35,7 @@ class Comment(models.Model):
 		return self.comment
 
 	def get_absolute_url(self):
-		# return reverse("post_detail")
 		return reverse("post_detail", kwargs={"pk": self.post.pk})
-
-	# class Meta:
-	# 	ordering = ["-date"]
 
 
 # How to add tags:

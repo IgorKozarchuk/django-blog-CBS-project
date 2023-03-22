@@ -1,16 +1,16 @@
-{% extends "blog_app/base.html" %}
+{% extends 'blog_app/base.html' %}
 
 {% block content %}
-
 <div class="container my-container">
+	<h2 class="my-5">Favourite Posts</h2>
+
+	<ul class="favor-posts">
 	{% for post in page_obj %}
-	<h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
-	<p class="text-secondary small">Author: <b>{{ post.author }}</b></p>
-	<p>{{ post.text|truncatewords:30 }}</p>
-	<hr>
+		<li class="list-group-item"><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></li>
 	{% empty %}
-	<p>No posts yet</p>
+		<li class="list-group-item">No posts yet</li>
 	{% endfor %}
+	</ul>
 
 	<div class="pagination">
 		<ul class="step-links container pagination justify-content-center">
@@ -30,5 +30,4 @@
 		</ul>
 	</div>
 </div>
-
 {% endblock content %}

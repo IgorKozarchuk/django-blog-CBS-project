@@ -149,7 +149,6 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage' # 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Log in/out
-
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 

@@ -1,0 +1,36 @@
+{% extends 'blog_app/base.html' %}
+
+{% block content %}
+<div class="container my-container">
+	<h2 class="my-5">My Profile</h2>
+	
+	<form action="" method="post">
+		{% csrf_token %}
+
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" value="{{ profile.email }}">
+		<br>
+
+		<label for="birthday" class="mt-3">Birthday:</label>
+		<input type="date" id="birthday" name="birthday" value="{{ profile.birthday|date:'Y-m-d'}}">
+		<br>
+
+		<button type="submit" class="btn btn-primary mt-4">Update Profile</button>
+	</form>
+
+	{% if messages %}
+	<ul class="messages mt-4 list-unstyled">
+		{% for message in messages %}
+		<li {% if message.tags %} class="{{ message.tags }} alert alert-primary alert-dismissible fade show" role="alert" {% endif %}>
+			{{ message }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+
+	<div class="mt-4">
+		<a href="{% url 'favourite_list' profile.user.username %}">Favourite posts</a>
+	</div>
+</div>
+{% endblock content %}

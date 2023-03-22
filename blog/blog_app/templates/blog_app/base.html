@@ -45,7 +45,7 @@
 
 			<div class="col-sm g-0 pt-4 pt-sm-0 text-end">
 			{% if user.is_authenticated %}
-				<p>Hi, <b>{{ user.username }}</b>!</p>
+				<p>Hi, <a href="{% url 'profile' user.username %}">{{ user.username }}</a>!</p>
 				<p><a href="{% url 'logout' %}">Log Out</a></p>
 			{% else %}
 				<p>You are not logged in</p>
@@ -60,5 +60,7 @@
 		{% block content %}
 		{% endblock content %}
 		
+		<!-- Bootstrap JS -->
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	</body>
 </html>

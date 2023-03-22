@@ -35,6 +35,15 @@ class CommentGet(DetailView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context["form"] = CommentForm()
+
+		post = self.get_object()
+		is_favor = False
+
+		if post.favourites.filter(pk=self.request.user.pk).exists():
+			is_favor = True
+
+		context["is_favor"] = is_favor
+
 		return context
 
 
@@ -60,7 +69,6 @@ class CommentPost(SingleObjectMixin, FormView):
 
 
 # wrapper view, handles GET and POST requests
-# class BlogDetailView(LoginRequiredMixin, View):
 class BlogDetailView(View):
 	def get(self, request, *args, **kwargs):
 		view = CommentGet.as_view()
@@ -80,7 +88,7 @@ def tagged(request, slug):
 	page_obj = paginator.get_page(page_number)
 	context = {
 		"tag": tag,
-		"post_list": posts,
+		# "post_list": posts,
 		"page_obj": page_obj
 	}
 	return render(request, "blog_app/index.html", context)
