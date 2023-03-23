@@ -1,7 +1,8 @@
-from django.views.generic import View, CreateView
+from django.views.generic import View, CreateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -78,3 +79,16 @@ def favourite_list(request, username):
 	}
 
 	return render(request=request, template_name=template_name, context=context)
+
+
+class AccountDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = get_user_model()
+	template_name = "accounts/delete_account.html"
+	success_url = reverse_lazy("index")
+
+	def get_object(self):
+		return self.model.objects.get(pk=self.request.user.pk)
+
+	def test_func(self):
+		obj = self.get_object()
+		return obj.pk == self.request.user.pk

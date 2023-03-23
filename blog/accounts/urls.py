@@ -8,4 +8,5 @@ urlpatterns = [
 	path("profile/<str:username>/", views.UserProfilelView.as_view(), name="profile"),
 	path("fav/<int:pk>/", views.favourite_add, name="favourite_add"),
 	path("profile/<str:username>/favourites/", views.favourite_list, name="favourite_list"),
+	path("account/<str:username>/delete/", views.AccountDeleteView.as_view(), name="delete_account"),
 ]
